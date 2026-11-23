@@ -17,10 +17,11 @@ GitHub Pages로 배포하면 별도 설치 없이 사용할 수 있습니다.
 - ffmpeg 코어(약 31MB)를 첫 실행 시 CDN에서 내려받습니다 → 첫 실행에 인터넷 연결 필요.
 - 처리한 영상은 서버에 업로드되지 않고 브라우저 안에만 존재합니다.
 
-## 온라인으로 올리는 방법
+## 공개 주소 / 공개 배포
 
-- 리포지토리를 **public**으로 바꾸면 Settings → Pages → Source: `main` / `/docs` 로 GitHub Pages 활성화 가능.
-- 또는 Releases의 `movieXTrim-web.zip`을 https://app.netlify.com/drop 에 드래그하면 계정 없이 바로 URL이 발급됩니다.
+- **웹사이트**: https://parksfamilyaicreate-lang.github.io/movieXTrim-web/ (로그인 불필요)
+- **다운로드**: https://github.com/parksfamilyaicreate-lang/movieXTrim-web/releases/latest (`movieXTrim.exe`, `movieXTrim-web.zip`)
+- 이 폴더(`docs/`)가 원본입니다. 소스 저장소에서 `python scripts/sync_web.py ../movieXTrim-web --push` 를 실행하면 공개 저장소로 복사·커밋·푸시되고 GitHub Pages에 자동 배포됩니다.
 
 ## 로컬 미리보기
 
