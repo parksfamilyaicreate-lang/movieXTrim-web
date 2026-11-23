@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="960" height="360" role="img" aria-label="scene change detection diagram">
+  <rect width="960" height="360" rx="20" fill="#fbfaf5"/>
+
+  <!-- film strip -->
+  <rect x="60" y="38" width="840" height="74" rx="8" fill="#3c322a"/>
+  <g fill="#fffdf8">
+    <rect x="70" y="45" width="18" height="8" rx="2"/><rect x="110" y="45" width="18" height="8" rx="2"/>
+    <rect x="150" y="45" width="18" height="8" rx="2"/><rect x="190" y="45" width="18" height="8" rx="2"/>
+    <rect x="230" y="45" width="18" height="8" rx="2"/><rect x="270" y="45" width="18" height="8" rx="2"/>
+    <rect x="310" y="45" width="18" height="8" rx="2"/><rect x="350" y="45" width="18" height="8" rx="2"/>
+    <rect x="390" y="45" width="18" height="8" rx="2"/><rect x="430" y="45" width="18" height="8" rx="2"/>
+    <rect x="470" y="45" width="18" height="8" rx="2"/><rect x="510" y="45" width="18" height="8" rx="2"/>
+    <rect x="550" y="45" width="18" height="8" rx="2"/><rect x="590" y="45" width="18" height="8" rx="2"/>
+    <rect x="630" y="45" width="18" height="8" rx="2"/><rect x="670" y="45" width="18" height="8" rx="2"/>
+    <rect x="710" y="45" width="18" height="8" rx="2"/><rect x="750" y="45" width="18" height="8" rx="2"/>
+    <rect x="790" y="45" width="18" height="8" rx="2"/><rect x="830" y="45" width="18" height="8" rx="2"/>
+    <rect x="870" y="45" width="18" height="8" rx="2"/>
+    <rect x="70" y="97" width="18" height="8" rx="2"/><rect x="110" y="97" width="18" height="8" rx="2"/>
+    <rect x="150" y="97" width="18" height="8" rx="2"/><rect x="190" y="97" width="18" height="8" rx="2"/>
+    <rect x="230" y="97" width="18" height="8" rx="2"/><rect x="270" y="97" width="18" height="8" rx="2"/>
+    <rect x="310" y="97" width="18" height="8" rx="2"/><rect x="350" y="97" width="18" height="8" rx="2"/>
+    <rect x="390" y="97" width="18" height="8" rx="2"/><rect x="430" y="97" width="18" height="8" rx="2"/>
+    <rect x="470" y="97" width="18" height="8" rx="2"/><rect x="510" y="97" width="18" height="8" rx="2"/>
+    <rect x="550" y="97" width="18" height="8" rx="2"/><rect x="590" y="97" width="18" height="8" rx="2"/>
+    <rect x="630" y="97" width="18" height="8" rx="2"/><rect x="670" y="97" width="18" height="8" rx="2"/>
+    <rect x="710" y="97" width="18" height="8" rx="2"/><rect x="750" y="97" width="18" height="8" rx="2"/>
+    <rect x="790" y="97" width="18" height="8" rx="2"/><rect x="830" y="97" width="18" height="8" rx="2"/>
+    <rect x="870" y="97" width="18" height="8" rx="2"/>
+  </g>
+  <rect x="96" y="56" width="130" height="38" rx="3" fill="#ffd9c7"/>
+  <rect x="234" y="56" width="130" height="38" rx="3" fill="#cfe3f5"/>
+  <rect x="372" y="56" width="130" height="38" rx="3" fill="#e7dec9"/>
+  <rect x="510" y="56" width="130" height="38" rx="3" fill="#ffd9c7"/>
+  <rect x="648" y="56" width="130" height="38" rx="3" fill="#cfe3f5"/>
+  <rect x="786" y="56" width="96" height="38" rx="3" fill="#e7dec9"/>
+
+  <!-- guide lines -->
+  <g stroke="#ff7043" stroke-width="2" stroke-dasharray="6 6" opacity="0.75">
+    <line x1="234" y1="116" x2="234" y2="296"/>
+    <line x1="510" y1="116" x2="510" y2="296"/>
+    <line x1="786" y1="116" x2="786" y2="296"/>
+  </g>
+
+  <!-- detection graph -->
+  <line x1="60" y1="280" x2="900" y2="280" stroke="#e7dec9" stroke-width="2"/>
+  <path d="M60 280 L120 274 L170 278 L210 270 L228 276 L234 150 L242 274 L300 278 L360 272 L420 277 L480 270 L504 274 L510 140 L518 276 L580 278 L640 271 L700 277 L760 273 L780 278 L786 152 L794 275 L850 278 L900 274"
+        fill="none" stroke="#ff7043" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#ff7043">
+    <circle cx="234" cy="150" r="7"/><circle cx="510" cy="140" r="7"/><circle cx="786" cy="152" r="7"/>
+  </g>
+  <g fill="#3c322a" opacity="0.35">
+    <circle cx="150" cy="277" r="4"/><circle cx="360" cy="274" r="4"/><circle cx="640" cy="272" r="4"/><circle cx="850" cy="277" r="4"/>
+  </g>
+</svg>

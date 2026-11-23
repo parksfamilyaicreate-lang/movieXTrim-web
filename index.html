@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>movieXTrim WEB</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-i18n-title="page.title">
+<header>
+  <h1>🎬 movieXTrim <span style="font-size:11px;color:#ff7043">WEB</span></h1>
+  <span class="subtitle" data-i18n="web.subtitle">ブラウザだけで動く簡易版（Python 不要）</span>
+  <a class="manual-link" href="manual.html" data-i18n="web.manual">📖 使い方</a>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang-btn="ja" class="active" aria-pressed="true">日本語</button>
+    <button type="button" data-lang-btn="ko" aria-pressed="false">한국어</button>
+    <button type="button" data-lang-btn="en" aria-pressed="false">English</button>
+  </div>
+</header>
+
+<main>
+  <div id="toast" class="toast toast-hidden"></div>
+
+  <section class="card" id="open-card">
+    <h2><span class="step">1</span><span data-i18n="web.open">動画を選択</span></h2>
+    <div class="row file-open-row">
+      <input type="file" id="file-input" accept="video/*">
+    </div>
+    <div id="open-file-name" class="muted small"></div>
+    <div class="manual-note" data-i18n="web.limit">ブラウザ版はメモリ上で処理するため、短い動画（目安 50MB 以下）向けです。</div>
+    <div class="manual-note" data-i18n="web.ai.notice">文字起こし・AI 機能は Python 版（exe）でのみ利用できます。</div>
+  </section>
+
+  <section class="card video-card" id="video-card" hidden>
+    <video id="video" controls preload="metadata"></video>
+  </section>
+
+  <nav class="page-tabs">
+    <button class="page-tab active" data-page="page-auto" data-i18n="tab.auto">🎬 自動分割</button>
+    <button class="page-tab" data-page="page-manual" data-i18n="tab.manual">✂ 手動編集</button>
+  </nav>
+
+  <section class="page" id="page-auto">
+    <section class="card" id="auto-card" hidden>
+      <h2><span class="step">2</span><span data-i18n="split.title">自動分割（シーンチェンジ検出）</span></h2>
+      <label class="muted"><span data-i18n="split.sensitivity">検出感度:</span> <b id="th-val">0.30</b> <span class="hint" data-i18n="split.hint">（小さいほど細かく分割）</span></label>
+      <input type="range" id="threshold" min="0.05" max="0.8" step="0.05" value="0.3">
+      <div class="row">
+        <label><span data-i18n="split.min_prefix">最小</span> <input type="number" id="min-dur" value="1" min="0" step="0.5" style="width:60px"> <span data-i18n="split.sec">秒</span></label>
+        <label><span data-i18n="split.max_prefix">最大</span> <input type="number" id="max-dur" placeholder="制限なし" min="0" style="width:80px"> <span data-i18n="split.sec">秒</span></label>
+      </div>
+      <div class="row">
+        <button id="btn-scenes" data-i18n="split.detect">チェンジポイントを検出</button>
+        <select id="cut-select" disabled><option value="" data-i18n="web.no_cuts">検出されたチェンジポイントなし</option></select>
+        <button id="btn-goto-cut" disabled data-i18n="split.goto">選択した地点へ移動</button>
+      </div>
+      <div id="scene-cuts" class="muted small"></div>
+      <button id="btn-run-split" class="primary big" data-i18n="web.split">選択した区間に分割</button>
+    </section>
+  </section>
+
+  <section class="page" id="page-manual" hidden>
+    <section class="card" id="manual-card" hidden>
+      <h2><span class="step">2</span><span data-i18n="edit.title">区間編集</span></h2>
+      <div class="row time-row">
+        <span id="current-time">00:00.0</span> / <span id="total-time">00:00.0</span>
+        <span class="spacer"></span>
+        <button id="btn-back-10" class="seek-btn">⏪ 10s</button>
+        <button id="btn-fwd-10" class="seek-btn">10s ⏩</button>
+      </div>
+      <div class="row time-row">
+        <button id="btn-mark-in" data-i18n="web.mark.start">開始 [I]</button>
+        <button id="btn-mark-out" data-i18n="web.mark.end">終了 [O]</button>
+        <button id="btn-add-seg" class="primary" data-i18n="web.add">区間追加</button>
+      </div>
+      <div class="row muted" id="pending-info" data-i18n="pending.hint">開始/終了を指定して［区間追加］を押してください</div>
+      <h3 data-i18n="web.selected">選択した区間</h3>
+      <ul id="seg-list" class="seg-list"></ul>
+      <h3 data-i18n="mode.title">処理方式</h3>
+      <div class="modes">
+        <label><input type="radio" name="web-mode" value="delete" checked> <span data-i18n="web.mode.delete">選択区間をカット</span></label>
+        <label><input type="radio" name="web-mode" value="keep"> <span data-i18n="web.mode.keep">選択区間のみ残す</span></label>
+        <label><input type="radio" name="web-mode" value="extract"> <span data-i18n="web.mode.extract">区間ごとにファイル化</span></label>
+      </div>
+      <button id="btn-run-edit" class="primary big" data-i18n="web.run">処理を実行</button>
+    </section>
+  </section>
+
+  <section class="card" id="progress-card" hidden>
+    <div class="row">
+      <b id="job-status" data-i18n="progress.processing">処理中...</b>
+      <span id="job-message" class="muted small"></span>
+    </div>
+    <div class="progress"><div id="progress-bar"></div></div>
+  </section>
+
+  <section class="card" id="result-card" hidden>
+    <h3 data-i18n="result.title">編集結果</h3>
+    <ul id="result-list" class="result-list"></ul>
+  </section>
+</main>
+
+<footer>movieXTrim WEB · <a href="manual.html" data-i18n="web.manual">📖 使い方</a></footer>
+
+<div id="preview-overlay" hidden>
+  <div class="preview-box">
+    <div class="preview-head">
+      <b>Preview</b>
+      <button id="btn-preview-close" data-i18n="preview.close">閉じる ✕</button>
+    </div>
+    <video id="preview-video" controls></video>
+  </div>
+</div>
+
+<script src="vendor/ffmpeg.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
